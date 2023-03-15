@@ -4,7 +4,7 @@ import request from 'supertest';
 import { app } from '@/app';
 import { createAndAuthenticateUser } from '@/utils/test/create-and-authenticate-user';
 
-describe('Profile Controller (e2e)', () => {
+describe('Create Gym Controller (e2e)', () => {
   beforeAll(async () => {
     await app.ready();
   });
@@ -13,17 +13,20 @@ describe('Profile Controller (e2e)', () => {
     await app.close();
   });
 
-  it('Should be able to get user profile', async () => {
+  it('Should be able to create gym', async () => {
     const { token } = await createAndAuthenticateUser(app);
 
-    const profileResponse = await request(app.server)
-      .get('/me')
+    const response = await request(app.server)
+      .post('/gyms')
       .set('Authorization', `Bearer ${token}`)
-      .send();
+      .send({
+        title: 'JavaScript Gym',
+        description: 'Some description',
+        phone: '1119998875',
+        latitude: -22.5555727,
+        longitude: -44.1499778,
+      });
 
-    expect(profileResponse.statusCode).toEqual(200);
-    expect(profileResponse.body.user).toEqual(expect.objectContaining({
-      email: 'johndoe@example.com'
-    }));
+    expect(response.statusCode).toEqual(201);
   });
 });

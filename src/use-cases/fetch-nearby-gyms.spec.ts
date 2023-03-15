@@ -27,7 +27,6 @@ describe('Fetch nearby gyms use case', () => {
       phone: null,
       latitude: -22.4690139,
       longitude: -43.8249774,
-      //-22.4690139,-43.8249774
     });
 
     const { gyms } = await sut.execute({

@@ -7,7 +7,7 @@ import { FindManyNearbyParams, GymsRepository } from '../gyms-repository';
 export class InMemoryGymsRepository implements GymsRepository {
   public items: Gym[] = [];
 
-  async create(data: Prisma.GymCreateInput): Promise<Gym> {
+  async create(data: Prisma.GymCreateInput) {
     const gym = {
       id: data.id ?? randomUUID(),
       title: data.title,
@@ -22,7 +22,7 @@ export class InMemoryGymsRepository implements GymsRepository {
     return gym;
   }
 
-  async findById(id: string): Promise<Gym | null> {
+  async findById(id: string) {
     const gym = this.items.find(item => item.id === id);
 
     if (!gym) {
@@ -32,13 +32,13 @@ export class InMemoryGymsRepository implements GymsRepository {
     return gym;
   }
 
-  async searchMany(query: string, page: number): Promise<Gym[]> {
+  async searchMany(query: string, page: number) {
     return this.items
       .filter(item => item.title.includes(query))
       .slice((page - 1) * 20, page * 20);
   }
 
-  async findManyNearby(params: FindManyNearbyParams): Promise<Gym[]> {
+  async findManyNearby(params: FindManyNearbyParams) {
     return this.items.filter(item => {
       const distance = getDistanceBetweenCoordinates(
         { latitude: params.latitude, longitude: params.longitude },

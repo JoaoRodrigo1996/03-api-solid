@@ -22,7 +22,7 @@ describe('Search Gyms Controller (e2e)', () => {
       .send({
         title: 'JavaScript Gym',
         description: 'Some description',
-        phone: '1119998875',
+        phone: '1199999999',
         latitude: -22.5555727,
         longitude: -44.1499778,
       });
@@ -33,7 +33,7 @@ describe('Search Gyms Controller (e2e)', () => {
       .send({
         title: 'TypeScript Gym',
         description: 'Some description',
-        phone: '1119998875',
+        phone: '1199999999',
         latitude: -22.5555727,
         longitude: -44.1499778,
       });
